@@ -124,3 +124,19 @@ Expected Output:
 "five: 4"
 "four: 3"
 "two: 2"
+
+Describe: filterBadWord(words, badWord)
+
+Test: If badWord in the argument is found, return the string without the word
+Code: filterBadWord("zoinks");
+Expected Output: ""
+
+Describe: filterBadWords(words)
+
+Test: If there are only bad words, return an empty string
+Code: filterBadWords("zoinks muppeteer biffaroni loopdaloop")
+Expected Output: ""
+
+Test: Should not remove words other than bad words
+Code: filterBadWords("This zoinks and muppeteer biffaroni and loopdaloop")
+Expected Output: "This and and"

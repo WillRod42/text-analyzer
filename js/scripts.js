@@ -60,6 +60,30 @@ function getUniqueWords(text) {
   return uniqueWords;
 }
 
+function filterBadWord(words, badWord) {
+  let splitWords = words.split(" ")
+  if (splitWords.includes(badWord)) {
+   splitWords = splitWords.filter(function(word) {
+    if (!word.includes(badWord)) {
+    	return true;
+    } if (word.includes(badWord)) {
+    		return false;
+      }
+    });
+    return splitWords.join(" ");
+  }
+  return words;
+}
+
+function filterBadWords(words) {
+  words = filterBadWord(words, "zoinks");
+  words = filterBadWord(words, "muppeteer");
+  words = filterBadWord(words, "biffaroni");
+  words = filterBadWord(words, "loopdaloop");
+
+  return words;
+}
+
 // UI Logic
 
 function boldPassage(word, text) {
@@ -112,17 +136,18 @@ function getTopThreeWords(text) {
   let topWordList = [];
 
   if (topThreeWords.length === 0) {
-    topWordList = $("<li>none</li>");
+    topWordList = "<li>none</li>";
   } else {
     topThreeWords.forEach(function(word, index) {
-      topWordList.push($("<li>" + word + ": " + topThreeWordCounts[index] + "</li>"));
+      topWordList.push("<li>" + word + ": " + topThreeWordCounts[index] + "</li>");
     });
   }
 
   return topWordList;
 }
 
-$(document).ready(function(){
+
+$(document).ready(function() {
   $("form#word-counter").submit(function(event){
     event.preventDefault();
     const passage = $("#text-passage").val();
@@ -134,7 +159,7 @@ $(document).ready(function(){
     $("#bolded-passage").html(boldPassage(word, passage));
     $("#top-three-count").text("");
     getTopThreeWords(passage).forEach(function(listItem) {
-      $("#top-three-count").append(listItem);
+      $("#top-three-count").append($(listItem));
     });
   });
 });
