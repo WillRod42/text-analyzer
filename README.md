@@ -91,6 +91,11 @@ const text = "hello there";
 boldPassage(word, text);
 Expected Output: "<p><b>hello</b> there</p>"
 
+Test: "It should wrap in `b` tags sections of words that match the word or letter sequence inputted."
+Code: 
+boldPassage(red, "redo not redone");
+Exepcted Output: "<b>red</b>o, not, <b>red</b>one"
+
 
 
 Describe: topThreeWords(text)

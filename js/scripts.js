@@ -86,6 +86,33 @@ function filterBadWords(words) {
 
 // UI Logic
 
+function boldPassagePart(word, text) {
+  if (noInputtedWord(word, text)) {
+    return "";
+  }
+
+  let htmlString = "<p>";
+  let textArray = text.split(" ");
+  textArray.forEach(function(element, index) {
+    let partIndex = 0;
+    if (element.includes(word)) {
+      element.split("").forEach(function(character, index) {
+        if (index + word.length <= element.length) {
+          if (element.slice(index, index + word.length) === word) {
+            partIndex = index;
+          }
+        }
+      });
+
+      element = element.slice(0, partIndex) + "<b>" + element.slice(partIndex, partIndex + word.length) + "</b>" + element.slice(partIndex + word.length, element.length);
+
+    }
+    htmlString += " " + element + " ";
+  });
+
+  return htmlString + "</p>";
+}
+
 function boldPassage(word, text) {
   if (noInputtedWord(word, text)) {
     return "";
@@ -156,7 +183,7 @@ $(document).ready(function() {
     const occurrencesOfWord = numberOfOccurrencesInText(word, passage);
     $("#total-count").html(wordCount);
     $("#selected-count").html(occurrencesOfWord);
-    $("#bolded-passage").html(boldPassage(word, passage));
+    $("#bolded-passage").html(boldPassagePart(word, passage));
     $("#top-three-count").text("");
     getTopThreeWords(passage).forEach(function(listItem) {
       $("#top-three-count").append($(listItem));
