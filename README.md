@@ -90,3 +90,37 @@ const word = "hello";
 const text = "hello there";
 boldPassage(word, text);
 Expected Output: "<p><b>hello</b> there</p>"
+
+
+
+Describe: topThreeWords(text)
+
+Test: "It should return 'none' if text is empty."
+Code: topThreeWords("");
+Expected Output: 
+"Most common words:"
+"none"
+
+Test: "It should return word count of each word if text has 3 or less words."
+Code: topThreeWords("one two three three");
+Expected Output: 
+"Most common words:"
+"three: 2"
+"one: 1"
+"two: 1"
+
+Test: "It should return word count of top 3 words if text has more than 3 words."
+Code: topThreeWords("one two three three four four four five five five five six");
+Expected Output: 
+"Most common words:"
+"five: 4"
+"four: 3"
+"three: 2"
+
+Test: "If text has a tie for most occurances it should return the count of the word(s) that occur first."
+Code: topThreeWords("one two two three three four four four five five five five six");
+Expected Output: 
+"Most common words:"
+"five: 4"
+"four: 3"
+"two: 2"
