@@ -1,7 +1,13 @@
 // Utility Logic
 
-function noInputtedWord(word, text) {
-  return ((text.trim().length === 0) || (word.trim().length === 0));
+function noInputtedWord() {
+  for (let i=0; i < arguments.length; i++) {
+    console.log(arguments[i]);
+    if (arguments[i].trim().length === 0) {
+      return true;
+    }
+  }
+  return false;
 }
 
 function filterPuncuation(word) {
@@ -13,7 +19,7 @@ function filterPuncuation(word) {
 // Business Logic
 
 function wordCounter(text) {
-  if (text.trim().length === 0) {
+  if (noInputtedWord(text)) {
     return 0;
   }
   let wordCount = 0;
@@ -82,6 +88,17 @@ function filterBadWords(words) {
   words = filterBadWord(words, "loopdaloop");
 
   return words;
+}
+
+function firstInstanceOfWord(word, text) {
+  const textArray = text.split(" ");
+  for (let i = 0; i < textArray.length; i++) {
+    console.log(i);
+    if (word === textArray[i]) {
+      return i;
+    }
+  }
+  return -1;
 }
 
 // UI Logic
